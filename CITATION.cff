@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this model or its data, please cite the paper below."
+title: "PyPSA-Italy: smart charging and vehicle-to-grid in Italy's power system"
+type: software
+license: MIT
+repository-code: "https://github.com/pranavdeep1992/PyPSA-Italy"
+keywords:
+  - PyPSA
+  - energy system modelling
+  - capacity expansion
+  - vehicle-to-grid
+  - smart charging
+  - Italy
+authors:
+  - family-names: Kumar
+    given-names: Pranav Deep
+    orcid: "https://orcid.org/0009-0005-0660-6307"
+    affiliation: "Politecnico di Milano; EURAC Research"
+preferred-citation:
+  type: article
+  title: "Role of Smart Charging and Vehicle-to-Grid for Long-Term Decarbonization Pathways in Italy"
+  journal: "Sustainable Energy Technologies and Assessments"
+  year: 2026
+  start: 105474
+  doi: "10.1016/j.seta.2026.105474"
+  authors:
+    - family-names: Kumar
+      given-names: Pranav Deep
+      orcid: "https://orcid.org/0009-0005-0660-6307"
+    # TODO: add the co-authors here in the same order as the paper

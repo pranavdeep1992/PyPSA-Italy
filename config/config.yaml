@@ -1,0 +1,58 @@
+# PyPSA-Italy run configuration
+#
+# Every script in scripts/ reads this file. Command-line flags (see --help)
+# override the values here for a single run, e.g. --scenario SC_30.
+
+# Scenario used when no --scenario flag is given.
+scenario: V2G_30
+
+# The three charging strategies compared in the paper. All of them are built
+# from the V2G-30% input workbooks in data/V2G_30/; ev_mode decides how the EV
+# fleet is modelled.
+#   v2g   : V2G-30%. 70% of EV demand is uncontrolled, 30% charges smartly
+#           and can feed power back to the grid
+#   smart : SC-30%. 70% uncontrolled, 30% charges smartly, no V2G
+#   dumb  : Dumb. 100% of EV demand is uncontrolled charging (no smart
+#           charging, no V2G); total EV demand is the same as in the other cases
+scenarios:
+  V2G_30:
+    data: V2G_30        # folder under data/ with input_<year>.xlsx
+    ev_mode: v2g
+    generation_mix_ymax: 700
+  SC_30:
+    data: V2G_30
+    ev_mode: smart
+    generation_mix_ymax: 700
+  Dumb:
+    data: V2G_30
+    ev_mode: dumb
+    generation_mix_ymax: 900
+
+years: [2025, 2030, 2035, 2040, 2045, 2050]
+
+# true: the optimal capacities of one year become the minimum capacities of the
+#       next year (myopic pathway; this is what the paper uses).
+# false: every year is solved on its own, starting from the 2025 fleet in the workbook.
+myopic: true
+
+solver:
+  name: gurobi        # 'highs' works without a licence but is slower
+  options: {}         # passed straight to the solver, e.g. {Method: 2, Crossover: 0}
+
+# Carriers whose capacity the optimiser may expand. Everything else keeps the
+# capacity written in the workbook. Carriers removed by ev_mode are skipped.
+extendable:
+  generators: [wind, pv_rooftop, pv_utility, pv_agri]
+  links: [AC, electrolyser, fuel_cell, smart_charging, V2G]
+  stores: [h2, EV_store]
+  storage_units: [battery]
+
+export:
+  # Also write the full solved network as one Excel workbook per year
+  # (same content as the CSV folder, handy for browsing).
+  full_excel: true
+
+plotting:
+  dpi: 300
+  winter_week: ["01-07", "01-13"]   # month-day, inclusive
+  summer_week: ["07-08", "07-14"]

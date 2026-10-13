@@ -1,0 +1,15 @@
+name: pypsa-italy
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - pypsa>=0.35
+  - pandas
+  - openpyxl
+  - xlsxwriter
+  - matplotlib
+  - pyyaml
+  - highspy
+  - pip
+  - pip:
+      - gurobipy

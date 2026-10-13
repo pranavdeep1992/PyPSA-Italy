@@ -1,0 +1,8 @@
+pypsa>=0.35
+pandas
+openpyxl
+xlsxwriter
+matplotlib
+pyyaml
+highspy
+gurobipy
